@@ -73,7 +73,7 @@ body {
     transform: translateX(-50%);
     color: #ffffffca;
     padding: 0.75rem 1.5rem;
-    animation: slideDown 0.3s forwards;
+    animation: slideDown 0.3s forwards;;
     z-index: 999;
     font-size: 0.9rem;
     text-align: center;
@@ -85,6 +85,16 @@ body {
     backdrop-filter: blur(10px);
 
     @keyframes slideDown {
+      from {
+        top: -3rem;
+      }
+
+      to {
+        top: 1rem;
+      }
+    }
+
+    @keyframes slideUp {
       from {
         top: -3rem;
       }

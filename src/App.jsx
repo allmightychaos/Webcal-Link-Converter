@@ -44,6 +44,7 @@ function App() {
   const handleClear = () => {
     setInputLink('')
     setConvertedLink('')
+    showToastMessage('Cleared the input.')
   }
 
   const showToastMessage = (message) => {
