@@ -1,0 +1,99 @@
+/* 
+  Minimal SCSS for a modern, glossy style and a gradient background.
+  You may adjust colors, gradients, or animations to match your preference.
+*/
+
+.app {
+  /* Full viewport height, flex centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #2196f3, #f44336);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .toast {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    animation: slideDown 0.3s forwards;
+    z-index: 999;
+    font-size: 0.9rem;
+
+    @keyframes slideDown {
+      from {
+        top: -3rem;
+      }
+
+      to {
+        top: 1rem;
+      }
+    }
+  }
+
+  .input-group {
+    position: relative;
+    width: 350px;
+    margin-bottom: 1rem;
+
+    input {
+      width: 100%;
+      padding: 0.75rem 3rem 0.75rem 1rem; // extra right padding for the button
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      // "Glossy" effect: subtle gradient + shadow
+      background: linear-gradient(180deg, #ffffff, #f1f1f1);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      &:focus {
+        border-color: #2196f3;
+      }
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      right: 0.5rem;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      // Make the button look like it's part of the input
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // Same subtle background for a "merged" feel
+      background: linear-gradient(180deg, #ffffff, #f1f1f1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:hover {
+        background: #ffffff;
+      }
+    }
+  }
+}

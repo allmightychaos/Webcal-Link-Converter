@@ -3,14 +3,20 @@ import React, { useState } from 'react'
 function App() {
   const [inputLink, setInputLink] = useState('')
   const [convertedLink, setConvertedLink] = useState('')
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   const handleChange = (event) => {
     const { value } = event.target
     setInputLink(value)
-    if (value.startsWith('webcal://')) {
-      setConvertedLink(value.replace('webcal://', 'https://'))
+    convertLink(value)
+  }
+
+  const convertLink = (raw) => {
+    if (raw.startsWith('webcal://')) {
+      setConvertedLink(raw.replace('webcal://', 'https://'))
     } else {
-      setConvertedLink(value)
+      setConvertedLink(raw)
     }
   }
 
@@ -18,81 +24,66 @@ function App() {
     try {
       const text = await navigator.clipboard.readText()
       setInputLink(text)
-      if (text.startsWith('webcal://')) {
-        setConvertedLink(text.replace('webcal://', 'https://'))
-      } else {
-        setConvertedLink(text)
-      }
+      convertLink(text)
+      showToastMessage('Pasted link from clipboard!')
     } catch (err) {
       console.error('Failed to read clipboard contents: ', err)
     }
   }
 
   const handleCopyToClipboard = async () => {
+    if (!convertedLink) return
     try {
       await navigator.clipboard.writeText(convertedLink)
-      alert('Copied!')
+      showToastMessage('Copied the link successfully!')
     } catch (err) {
       console.error('Failed to copy: ', err)
     }
   }
 
+  const showToastMessage = (message) => {
+    setToastMessage(message)
+    setShowToast(true)
+    // Hide toast after 2 seconds
+    setTimeout(() => {
+      setShowToast(false)
+    }, 2000)
+  }
+
   return (
-    <div style={styles.container}>
-      <h1>Webcal Link Converter</h1>
-      <div style={styles.inputContainer}>
-        <button onClick={handlePasteFromClipboard} style={styles.btn}>
-          Paste
-        </button>
+    <div className="app">
+      {showToast && (
+        <div className="toast">
+          {toastMessage}
+        </div>
+      )}
+      <h1>Webcal Link Generator</h1>
+
+      <div className="input-group">
         <input
           type="text"
           placeholder="Paste or type your webcal:// link here"
           value={inputLink}
           onChange={handleChange}
-          style={styles.inputField}
         />
+        <button onClick={handlePasteFromClipboard}>
+          <img src="/img/paste.svg" alt="Paste" />
+        </button>
       </div>
-      <div style={styles.outputContainer}>
+
+      <div className="input-group">
         <input
           type="text"
           readOnly
           value={convertedLink}
           placeholder="Converted link will appear here"
-          style={styles.inputField}
         />
-        <button onClick={handleCopyToClipboard} style={styles.btn}>
-          Copy
+        <button onClick={handleCopyToClipboard}>
+          <img src="/img/copy.svg" alt="Copy" />
         </button>
       </div>
     </div>
   )
-}
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '50px auto',
-    textAlign: 'center',
-    fontFamily: 'sans-serif'
-  },
-  inputContainer: {
-    display: 'flex',
-    marginBottom: '20px',
-    justifyContent: 'center'
-  },
-  outputContainer: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  inputField: {
-    width: '300px',
-    padding: '8px',
-    margin: '0 10px'
-  },
-  btn: {
-    padding: '8px 16px',
-    cursor: 'pointer'
-  }
 }
 
 export default App

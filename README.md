@@ -1,4 +1,4 @@
-# Webcal Link Converter
+# Webcal Link Generator
 
 A minimalistic React + Vite application to convert `webcal://` links into `https://` links, useful for inserting calendar links into other calendars that require standard HTTP links.
 
@@ -14,3 +14,4 @@ npm install
 
 # 2) Start development server
 npm run dev
+```
