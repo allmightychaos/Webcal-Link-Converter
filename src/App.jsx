@@ -80,7 +80,7 @@ function App() {
               onChange={handleChange}
             />
             <button onClick={handlePasteFromClipboard}>
-              <img src="/img/paste.png" alt="Paste" />
+              <img src="https://raw.githubusercontent.com/allmightychaos/Webcal-Link-Converter/9666db32c1053afa33120be820fade601b3d6c44/img/copy.png" alt="Paste" />
             </button>
           </div>
 
@@ -91,7 +91,7 @@ function App() {
               placeholder="Converted link will appear here"
             />
             <button onClick={handleCopyToClipboard}>
-              <img src="/img/copy.png" alt="Copy" />
+              <img src="https://raw.githubusercontent.com/allmightychaos/Webcal-Link-Converter/9666db32c1053afa33120be820fade601b3d6c44/img/paste.png" alt="Copy" />
             </button>
           </div>
 
