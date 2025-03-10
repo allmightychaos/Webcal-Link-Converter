@@ -41,6 +41,11 @@ function App() {
     }
   }
 
+  const handleClear = () => {
+    setInputLink('')
+    setConvertedLink('')
+  }
+
   const showToastMessage = (message) => {
     setToastMessage(message)
     setShowToast(true)
@@ -52,35 +57,47 @@ function App() {
 
   return (
     <div className="app">
-      {showToast && (
-        <div className="toast">
-          {toastMessage}
+       {/* Background lights */}
+       <div className="background-light light1"></div>
+      <div className="background-light light2"></div>
+
+       {/* Toast */}
+      {showToast && <div className="toast">{toastMessage}</div>}
+
+       {/* Container for the title and converter */}
+      <div className="container">
+        <div className="title">
+          <h1>Webcal Link Converter</h1>
         </div>
-      )}
-      <h1>Webcal Link Generator</h1>
 
-      <div className="input-group">
-        <input
-          type="text"
-          placeholder="Paste or type your webcal:// link here"
-          value={inputLink}
-          onChange={handleChange}
-        />
-        <button onClick={handlePasteFromClipboard}>
-          <img src="/img/paste.svg" alt="Paste" />
-        </button>
-      </div>
+        <div className="converter">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Insert webcal:// link here"
+              value={inputLink}
+              onChange={handleChange}
+            />
+            <button onClick={handlePasteFromClipboard}>
+              <img src="/img/paste.png" alt="Paste" />
+            </button>
+          </div>
 
-      <div className="input-group">
-        <input
-          type="text"
-          readOnly
-          value={convertedLink}
-          placeholder="Converted link will appear here"
-        />
-        <button onClick={handleCopyToClipboard}>
-          <img src="/img/copy.svg" alt="Copy" />
-        </button>
+          <div className="input-group">
+            <input
+              type="text"
+              value={convertedLink}
+              placeholder="Converted link will appear here"
+            />
+            <button onClick={handleCopyToClipboard}>
+              <img src="/img/copy.png" alt="Copy" />
+            </button>
+          </div>
+
+          <div className="button-group">
+            <button onClick={handleClear}>Clear</button>
+          </div>
+        </div>
       </div>
     </div>
   )
